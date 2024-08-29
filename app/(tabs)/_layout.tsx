@@ -1,37 +1,76 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import React from 'react'
+import { Tabs } from 'expo-router' 
+import TabIcon from '@/components/TabBarIcon'
+import icons from '@/constants/images'
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+    <>
+      <Tabs
+        screenOptions={{
+          tabBarShowLabel : false,
+          tabBarActiveTintColor : '#FFA001', 
+          tabBarInactiveTintColor : '#333',
+          tabBarStyle : {
+            backgroundColor : '#fff',
+            borderTopWidth : 2,
+            borderTopColor : '#fff',
+            height : 75
+          }
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
-  );
+      >
+        <Tabs.Screen
+          name="home"
+          options={{
+            title : 'Home',
+            headerShown : false,
+            tabBarIcon : ({color , focused }) =>  (
+              <TabIcon
+                icon={icons.home}
+                color={color} 
+                name="Home"
+                focused={focused}
+              />
+            )
+          }}
+        />
+
+        <Tabs.Screen
+           name="causelist"
+           options={{
+             title : 'Cause List',
+             headerShown : false,
+             tabBarIcon : ({color , focused }) =>  (
+              <TabIcon
+                icon={icons.search}
+                color={color} 
+                name="Cause List"
+                focused={focused}
+              />
+            )
+           }}
+        />
+        
+        <Tabs.Screen
+           name="calendar"
+           options={{
+             title : 'Calendar',
+             headerShown : false,
+             tabBarIcon : ({color , focused }) =>  (
+              <TabIcon
+                icon={icons.calendar}
+                color={color} 
+                name="Calendar"
+                focused={focused}
+              />
+            )
+           }}
+        />
+        
+        
+      </Tabs>
+    </>
+  )
 }
+
+export default TabLayout
